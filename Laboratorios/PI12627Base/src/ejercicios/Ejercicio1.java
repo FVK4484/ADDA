@@ -2,7 +2,7 @@ package ejercicios;
 
 import java.util.List;
 
-// HolaMundo
+
 
 public class Ejercicio1 {
 	
