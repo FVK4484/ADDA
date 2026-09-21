@@ -1,6 +1,5 @@
 package ejercicios;
 
-import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
@@ -67,12 +66,27 @@ public class Ejercicio1 {
 			
 			if (elem.a() % 10 != 0) {
 				
-				ac = ac.isEmpty() ? elem.s() : ac + "-" + elem.s();;
+				if (ac.isEmpty()) {
+					
+					ac = elem.s();
+					
+				} else {
+					
+					ac = ac + "-" + elem.s();
+					
+				}
 	            
 	        }
 			
         	int nextA = elem.a() + 3;
-	        String nextS = (elem.a() % 2 == 0) ? elem.a() + "*" : elem.a() + "!";
+        	String nextS = elem.a() + "!";
+        	
+        	if (elem.a() % 2 == 0) {
+        		
+        		nextS = elem.a() + "*";
+        		
+        	}
+        	
 	        elem = EnteroCadena.of(nextA, nextS);
 	        return recFinal(nextA, varB, elem, ac);
 	        
