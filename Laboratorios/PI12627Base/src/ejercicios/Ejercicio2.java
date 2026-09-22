@@ -24,7 +24,20 @@ public class Ejercicio2 {
 	}
 	
 	public static List<String> ejercicio2Iterativo(Integer a, String s){
-		return null;
+		List<String> res = new ArrayList<>();
+		while (a > 2 && s.length() > 2) {
+			if (a % 2 == 0) {
+				res.add(0, a.toString());
+				a = a / 2;
+				s = s.substring(0, s.length() - 2);
+			} else {
+				res.add(0, a.toString() + s.substring(0, a % s.length()));
+				a = a / 3;
+				s = s.substring(0, s.length() - 1);
+			}
+		}
+		res.add(0, a.toString() + s);
+		return res;
 	}
 	
 	public static List<String> ejercicio2RecursivoFinal(Integer a, String s) {
