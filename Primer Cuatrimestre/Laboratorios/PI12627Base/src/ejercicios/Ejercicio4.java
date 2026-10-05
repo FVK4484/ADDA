@@ -26,21 +26,23 @@ public class Ejercicio4 {
 	}
 	
 	public static Double funcItDouble(Integer a) {
-		while (a >= 10) {
-//			double n = Math.sqrt(3 * a);
-			a = a - 2;
-		}
-		double d = 5.;
-        return d;
+	    double res = 5.0; // Partimos del valor base
+	    while (a >= 10) {
+	        res = res * Math.sqrt(3 * a); // Acumulamos la multiplicación
+	        a = a - 2;
+	    }
+	    return res;
 	}
-	
+
 	public static BigInteger funcItBig(Integer a) {
-		while (a >= 10) {
-//			double n = Math.sqrt(3 * a);
-			a = a - 2;
-		}
-		int d = 5;
-        return BigInteger.valueOf(d);
+	    BigInteger res = BigInteger.valueOf(5L); // Partimos del valor base
+	    while (a >= 10) {
+	        // Calculamos el factor truncándolo a entero, igual que en tu versión recursiva
+	        BigInteger factor = BigInteger.valueOf((int) Math.sqrt(3 * a));
+	        res = res.multiply(factor); // Acumulamos la multiplicación
+	        a = a - 2;
+	    }
+	    return res;
 	}
 
 }

@@ -14,17 +14,13 @@ import us.lsi.curvefitting.GenData;
 import us.lsi.curvefitting.PowerLog;
 import us.lsi.graphics.MatPlotLib;
 
-
-
 public class TestEjercicio4 {
 	
 	private static Integer nMin = 100; // n mínimo para el cálculo de potencia
 	private static Integer nMax = 100000; // n máximo para el cálculo de potencia
 	private static Integer razon = 3330; // incremento en los valores de n del cálculo de potencia
-	private static Integer nIter = 50; // número de iteraciones para cada medición de tiempo
-	private static Integer nIterWarmup = 10000; // número de iteraciones para warmup
-
-	private static Integer a = 3;
+	private static Integer nIter = 5; // número de iteraciones para cada medición de tiempo
+	private static Integer nIterWarmup = 5; // número de iteraciones para warmup
 	
 	public static void genData (Consumer<Integer> algorithm, String file) {
 		Function<Integer,Long> f1 = GenData.time(algorithm);
@@ -47,10 +43,10 @@ public class TestEjercicio4 {
 	
 
 	public static void main(String[] args) {
-		genData(t -> Ejercicio4.funcRecDouble(a),"resources/datos/tmp/PI1Ejercicio4_RecDouble.txt");
-		genData(t -> Ejercicio4.funcRecBig(a),"resources/datos/tmp/PI1Ejercicio4_RecBig.txt");
-		genData(t -> Ejercicio4.funcItDouble(a),"resources/datos/tmp/PI1Ejercicio4_ItDouble.txt");
-		genData(t -> Ejercicio4.funcItBig(a),"resources/datos/tmp/PI1Ejercicio4_ItBig.txt");
+		genData(t -> Ejercicio4.funcRecDouble(t),"resources/datos/tmp/PI1Ejercicio4_RecDouble.txt");
+		genData(t -> Ejercicio4.funcRecBig(t),"resources/datos/tmp/PI1Ejercicio4_RecBig.txt");
+		genData(t -> Ejercicio4.funcItDouble(t),"resources/datos/tmp/PI1Ejercicio4_ItDouble.txt");
+		genData(t -> Ejercicio4.funcItBig(t),"resources/datos/tmp/PI1Ejercicio4_ItBig.txt");
 		
 		
 		show(PowerLog.of(List.of(Pair.of(2, 0.),Pair.of(3, 0.))), "resources/datos/tmp/PI1Ejercicio4_RecDouble.txt","RecursivaDouble");
@@ -60,7 +56,5 @@ public class TestEjercicio4 {
 		
 		showCombined();
 	}
-
-
 
 }
