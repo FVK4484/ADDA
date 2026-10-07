@@ -91,4 +91,37 @@ public class Ejercicio3 {
 		}
 		return mem.get(Tupla.of(a, b, c));
 	}
+	
+//	public static Set<Integer> ejercicio3Iterativo(Integer a, Integer b, Integer c) {
+//		
+//		Map<Tupla, Set<Integer>> mem = new HashMap<>();
+//		
+//		Set<Integer> res = new HashSet<>();
+//		
+//		while ((a > 5 && b > 3 && c > 2) 
+//				&& (a > 8 && b > 6 && c > 4)) {
+//			
+//			res.addAll(mem.get(Tupla.of(a / 2, b - 3, c / 4)));
+//			res.addAll(mem.get(Tupla.of(a - 3, b / 3,  c - 2)));
+//			mem.put(Tupla.of(a, b, c), res);
+//			
+//		} if (a <= 5 || b <= 3 || c <= 2) {
+//			
+//			res.add(a + 2);
+//			res.add(b * 3);
+//			res.add(c);
+//			
+//		} else {
+//			
+//			res.add(a);
+//			res.add(b + 2);
+//			res.add(c * 3);
+//			
+//		}
+//		
+//		mem.put(Tupla.of(a, b, c), res);
+//		
+//		return mem.get(Tupla.of(a, b, c));
+//	}
+	
 }
