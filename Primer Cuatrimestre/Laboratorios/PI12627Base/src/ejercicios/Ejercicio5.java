@@ -5,7 +5,12 @@ import java.math.BigInteger;
 public class Ejercicio5 {
 
 	public static Double ejercicio5ItDouble(Integer n) {
-		return null;
+		double d = 0.;
+		while(n > 6) {
+			d = 1 + d * log2(n - 1);
+			n--;
+		}
+		return 1.;
 	}
 	
 	public static Double ejercicio5RecDouble(Integer n) {
@@ -33,7 +38,12 @@ public class Ejercicio5 {
 	}
 	
 	public static BigInteger ejercicio5ItBigInteger(Integer n) {
-		return null;
+		double d = 0.;
+		while(n > 6) {
+			d = 1 + d * log2(n - 1);
+			n--;
+		}
+		return BigInteger.valueOf(1L);
 	}
 
 	public static int log2(int n){
