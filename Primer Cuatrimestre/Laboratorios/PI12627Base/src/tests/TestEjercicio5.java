@@ -16,11 +16,12 @@ import us.lsi.graphics.MatPlotLib;
 
 public class TestEjercicio5 {
 	
-	private static Integer nMin = 100; 
-	private static Integer nMax = 50000; // Ajustado al tamaño de las gráficas del resultado
-	private static Integer razon = 3330; 
-	private static Integer nIter = 50; // Reducido drásticamente para evitar bloqueos
-	private static Integer nIterWarmup = 10000 ; // Calentamiento mínimo para que sea casi instantáneo
+	private static Integer nMin = 100; // n mínimo para el cálculo de potencia
+	private static Integer nMax = 100000; // n máximo para el cálculo de potencia
+	private static Integer razon = 3330; // incremento en los valores de n del cálculo de potencia
+	private static Integer nIter = 50; // número de iteraciones para cada medición de tiempo
+	private static Integer nIterWarmup = 10000; // número de iteraciones para warmup
+
 	
 	public static void genData (Consumer<Integer> algorithm, String file) {
 		Function<Integer,Long> f1 = GenData.time(algorithm);
@@ -34,26 +35,33 @@ public class TestEjercicio5 {
 	}
 	         
 	public static void showCombined() {
-		MatPlotLib.showCombined("Tiempos",
+		MatPlotLib.showCombined("Comparativa",
 				List.of("resources/datos/tmp/PI1Ejercicio5_RecDouble.txt",
-						"resources/datos/tmp/PI1Ejercicio5_ItDouble.txt",
 						"resources/datos/tmp/PI1Ejercicio5_RecBigInteger.txt",
+						"resources/datos/tmp/PI1Ejercicio5_ItDouble.txt",
 						"resources/datos/tmp/PI1Ejercicio5_ItBigInteger.txt"), 
-				List.of("Recursiva-Double", "Iterativa-Double", "Recursiva-BigInteger", "Iterativa-BigInteger"));
+				List.of("Recursiva-Double", "Recursiva-BigInteger", "Iterativa-Double", "Iterativa-BigInteger"));
 	}
 	
 	public static void main(String[] args) {
-		// Pasamos la variable 't' para que los tamaños vayan de 100 a 50.000
-		genData(t -> Ejercicio5.ejercicio5RecBigInteger(t),"resources/datos/tmp/PI1Ejercicio5_RecBigInteger.txt");
-		genData(t -> Ejercicio5.ejercicio5RecDouble(t),"resources/datos/tmp/PI1Ejercicio5_RecDouble.txt");
-//		genData(t -> Ejercicio5.ejercicio5ItBigInteger(t),"resources/datos/tmp/PI1Ejercicio5_ItBigInteger.txt");
-//		genData(t -> Ejercicio5.ejercicio5ItDouble(t),"resources/datos/tmp/PI1Ejercicio5_ItDouble.txt");
+//		genData(t -> Ejercicio5.ejercicio5RecDouble(t),
+//				"resources/datos/tmp/PI1Ejercicio5_RecDouble.txt");
+//		genData(t -> Ejercicio5.ejercicio5RecBigInteger(t),
+//				"resources/datos/tmp/PI1Ejercicio5_RecBigInteger.txt");
+//		genData(t -> Ejercicio5.ejercicio5ItDouble(t),
+//				"resources/datos/tmp/PI1Ejercicio5_ItDouble.txt");
+//		genData(t -> Ejercicio5.ejercicio5ItBigInteger(t),
+//				"resources/datos/tmp/PI1Ejercicio5_ItBigInteger.txt");
 		
-		show(PowerLog.of(List.of(Pair.of(2, 0.),Pair.of(3, 0.))),"resources/datos/tmp/PI1Ejercicio5_RecBigInteger.txt","RecursivaBigInt");
-//		show(PowerLog.of(List.of(Pair.of(2, 0.),Pair.of(3, 0.))), "resources/datos/tmp/PI1Ejercicio5_ItBigInteger.txt","IterativaBigInt");
-		show(PowerLog.of(List.of(Pair.of(2, 0.),Pair.of(3, 0.))), "resources/datos/tmp/PI1Ejercicio5_RecDouble.txt","RecursivaDouble");
-//		show(PowerLog.of(List.of(Pair.of(2, 0.),Pair.of(3, 0.))), "resources/datos/tmp/PI1Ejercicio5_ItDouble.txt","IterativaDouble");
+		show(PowerLog.of(List.of(Pair.of(1, 1.),Pair.of(2, 0.))), 
+				"resources/datos/tmp/PI1Ejercicio5_RecDouble.txt","Recursiva-Double");
+//		show(PowerLog.of(List.of(Pair.of(1, 3.),Pair.of(2, 0.))), 
+//				"resources/datos/tmp/PI1Ejercicio5_RecBigInteger.txt","Recursiva-BigInt");
+//		show(PowerLog.of(List.of(Pair.of(1, 1.),Pair.of(2, 0.))), 
+//				"resources/datos/tmp/PI1Ejercicio5_ItDouble.txt","Iterativa-Double");
+//		show(PowerLog.of(List.of(Pair.of(1, 3.),Pair.of(2, 0.))), 
+//				"resources/datos/tmp/PI1Ejercicio5_ItBigInteger.txt","Iterativa-BigInt");
 		
-		showCombined();
+//		showCombined();
 	}
 }
