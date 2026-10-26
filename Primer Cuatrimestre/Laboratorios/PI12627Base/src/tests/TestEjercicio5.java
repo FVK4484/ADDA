@@ -16,11 +16,11 @@ import us.lsi.graphics.MatPlotLib;
 
 public class TestEjercicio5 {
 	
-	private static Integer nMin = 100; // n mínimo para el cálculo de potencia
-	private static Integer nMax = 100000; // n máximo para el cálculo de potencia
-	private static Integer razon = 3330; // incremento en los valores de n del cálculo de potencia
-	private static Integer nIter = 50; // número de iteraciones para cada medición de tiempo
-	private static Integer nIterWarmup = 10000; // número de iteraciones para warmup
+	private static Integer nMin = 100; 
+	private static Integer nMax = 15000; 
+	private static Integer razon = 500; 
+	private static Integer nIter = 100; 
+	private static Integer nIterWarmup = 50;
 
 	
 	public static void genData (Consumer<Integer> algorithm, String file) {
@@ -55,13 +55,13 @@ public class TestEjercicio5 {
 		
 		show(PowerLog.of(List.of(Pair.of(1, 1.),Pair.of(2, 0.))), 
 				"resources/datos/tmp/PI1Ejercicio5_RecDouble.txt","Recursiva-Double");
-//		show(PowerLog.of(List.of(Pair.of(1, 3.),Pair.of(2, 0.))), 
-//				"resources/datos/tmp/PI1Ejercicio5_RecBigInteger.txt","Recursiva-BigInt");
-//		show(PowerLog.of(List.of(Pair.of(1, 1.),Pair.of(2, 0.))), 
-//				"resources/datos/tmp/PI1Ejercicio5_ItDouble.txt","Iterativa-Double");
-//		show(PowerLog.of(List.of(Pair.of(1, 3.),Pair.of(2, 0.))), 
-//				"resources/datos/tmp/PI1Ejercicio5_ItBigInteger.txt","Iterativa-BigInt");
+		show(PowerLog.of(List.of(Pair.of(1, 2.),Pair.of(2, 0.))), 
+				"resources/datos/tmp/PI1Ejercicio5_RecBigInteger.txt","Recursiva-BigInt");
+		show(PowerLog.of(List.of(Pair.of(1, 1.),Pair.of(2, 0.))), 
+				"resources/datos/tmp/PI1Ejercicio5_ItDouble.txt","Iterativa-Double");
+		show(PowerLog.of(List.of(Pair.of(1, 2.),Pair.of(2, 0.))), 
+				"resources/datos/tmp/PI1Ejercicio5_ItBigInteger.txt","Iterativa-BigInt");
 		
-//		showCombined();
+		showCombined();
 	}
 }

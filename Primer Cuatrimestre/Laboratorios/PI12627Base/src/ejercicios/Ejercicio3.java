@@ -13,18 +13,15 @@ public class Ejercicio3 {
 			set.add(a + 2);
 			set.add(b * 3);
 			set.add(c);
-			return set;
 		} else if (a <= 8 || b <= 6 || c <= 4) {
 			set.add(a);
 			set.add(b + 2);
 			set.add(c * 3);
-			return set;
 		} else {
-			Set<Integer> set1 = ejercicio3RecursivoSinMemoria(a / 2, b - 3, c / 4);
-			Set<Integer> set2 = ejercicio3RecursivoSinMemoria(a - 3, b / 3, c - 2);
-			set1.addAll(set2);
-			return set1;
+			set = ejercicio3RecursivoSinMemoria(a / 2, b - 3, c / 4);
+			set.addAll(ejercicio3RecursivoSinMemoria(a - 3, b / 3, c - 2));
 		}
+		return set;
 	}
 	
 	public static Set<Integer> ejercicio3RecursivoConMemoria(Integer a, Integer b, Integer c) {
@@ -38,15 +35,11 @@ public class Ejercicio3 {
 	}
 	
 	public static Set<Integer> ejercicio3RecursivoConMemoria(Integer a, Integer b, Integer c, Map<Tupla, Set<Integer>> mem) {
-		
-		Tupla clave = new Tupla(a, b, c);
-		
-		if (mem.containsKey(clave)) {
-			return mem.get(clave);
+		Tupla t = Tupla.of(a, b, c);
+		if (mem.containsKey(t)) {
+			return mem.get(t);
 		}
-		
-		Set<Integer> set = new HashSet<>();
-		
+		Set<Integer> set = new HashSet<Integer>();
 		if (a <= 5 || b <= 3 || c <= 2) {
 			set.add(a + 2);
 			set.add(b * 3);
@@ -56,72 +49,37 @@ public class Ejercicio3 {
 			set.add(b + 2);
 			set.add(c * 3);
 		} else {
-			Set<Integer> set1 = ejercicio3RecursivoConMemoria(a / 2, b - 3, c / 4, mem);
-			Set<Integer> set2 = ejercicio3RecursivoConMemoria(a - 3, b / 3, c - 2, mem);
-			set1.addAll(set2);
-			set.addAll(set1);
+			set = ejercicio3RecursivoConMemoria(a / 2, b - 3, c / 4, mem);
+			set.addAll(ejercicio3RecursivoConMemoria(a - 3, b / 3, c - 2, mem));
 		}
-		
-		mem.put(clave, set);
-		
-		return new HashSet<>(set);
+		mem.put(t, set);
+		return mem.get(t);
 	}
 	
 	public static Set<Integer> ejercicio3Iterativo(Integer a, Integer b, Integer c) {
-		Map<Tupla, Set<Integer>> mem = new HashMap<>();
+		Map<Tupla, Set<Integer>> mem = new HashMap<Tupla, Set<Integer>>();
 		for (int i = 0; i <= a; i++) {
 			for (int j = 0; j <= b; j++) {
 				for (int k = 0; k <= c; k++) {
-					Set<Integer> res = new HashSet<>();
+					Tupla t = Tupla.of(i, j, k);
+					Set<Integer> set = new HashSet<Integer>();
 					if (i <= 5 || j <= 3 || k <= 2) {
-						res.add(2 + i);
-						res.add(j * 3);
-						res.add(k);
+						set.add(i + 2);
+						set.add(j * 3);
+						set.add(k);
 					} else if (i <= 8 || j <= 6 || k <= 4) {
-						res.add(i);
-						res.add(j + 2);
-						res.add(3 * k);
+						set.add(i);
+						set.add(j + 2);
+						set.add(k * 3);
 					} else {
-						res.addAll(mem.get(Tupla.of(i / 2, j - 3, k / 4)));
-						res.addAll(mem.get(Tupla.of(i - 3, j / 3, k - 2)));
+						set.addAll(mem.get(Tupla.of(i / 2, j - 3, k / 4)));
+						set.addAll(mem.get(Tupla.of(i - 3, j / 3, k - 2)));
 					}
-					mem.put(Tupla.of(i, j, k), res);
+					mem.put(t, set);
 				}
-			}	
+			}
 		}
 		return mem.get(Tupla.of(a, b, c));
 	}
-	
-//	public static Set<Integer> ejercicio3Iterativo(Integer a, Integer b, Integer c) {
-//		
-//		Map<Tupla, Set<Integer>> mem = new HashMap<>();
-//		
-//		Set<Integer> res = new HashSet<>();
-//		
-//		while ((a > 5 && b > 3 && c > 2) 
-//				&& (a > 8 && b > 6 && c > 4)) {
-//			
-//			res.addAll(mem.get(Tupla.of(a / 2, b - 3, c / 4)));
-//			res.addAll(mem.get(Tupla.of(a - 3, b / 3,  c - 2)));
-//			mem.put(Tupla.of(a, b, c), res);
-//			
-//		} if (a <= 5 || b <= 3 || c <= 2) {
-//			
-//			res.add(a + 2);
-//			res.add(b * 3);
-//			res.add(c);
-//			
-//		} else {
-//			
-//			res.add(a);
-//			res.add(b + 2);
-//			res.add(c * 3);
-//			
-//		}
-//		
-//		mem.put(Tupla.of(a, b, c), res);
-//		
-//		return mem.get(Tupla.of(a, b, c));
-//	}
 	
 }
