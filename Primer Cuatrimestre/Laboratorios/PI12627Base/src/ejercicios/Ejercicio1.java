@@ -31,33 +31,36 @@ public class Ejercicio1 {
 		} 
 	
 	public static String iterativo(Integer varA, Integer varB) {	
-	    List<String> res = new ArrayList<>();
-	    EnteroCadena elem = EnteroCadena.of(varA, "A");
-	    while (elem.a() < varB) {
-	        if (elem.a() % 10 != 0) {
-	            res.add(elem.s());
-	        } 
-	        String nextS = (elem.a() % 2 == 0) ? elem.a() + "*" : elem.a() + "!";
-	        int nextA = elem.a() + 3;
-	        elem = EnteroCadena.of(nextA, nextS);      
-	    }
-	    return String.join("-", res);
+		EnteroCadena ec = EnteroCadena.of(varA, "A");
+		List<String> ac = new ArrayList<String>();
+		while (ec.a() < varB) {
+			if (ec.a() % 10 != 0) {
+				ac.add(ec.s());
+			}
+			int nextA = ec.a() + 3;
+			String nextS = ec.a() + "!";
+			if (ec.a() % 2 == 0) {
+				nextS = ec.a() + "*";
+			}
+			ec = EnteroCadena.of(nextA, nextS);
+		}
+		return String.join("-", ac);
 	}
 	
 	public static String recFinal(Integer varA, Integer varB) {	
-		return recFinal(varA, varB, new EnteroCadena(varA, "A"), new ArrayList<String>());
+		return recFinal(varA, varB, EnteroCadena.of(varA, "A"), new ArrayList<String>());
 	}
 	
-	private static String recFinal(Integer varA, Integer varB, EnteroCadena elem, List<String> ac) {
-		if (elem.a() < varB) {
-			if (elem.a() % 10 != 0) {
-				ac.add(elem.s());
+	public static String recFinal(Integer varA, Integer varB, EnteroCadena ec, List<String> ac) {	
+		if (ec.a() < varB) {
+			if (ec.a() % 10 != 0) {
+				ac.add(ec.s());
 			}
-			String nextS = elem.a() + "!";
-			if (elem.a() % 2 == 0) {
-				nextS = elem.a() + "*";
+			int nextA = ec.a() + 3;
+			String nextS = ec.a() + "!";
+			if (ec.a() % 2 == 0) {
+				nextS = ec.a() + "*";
 			}
-			int nextA = elem.a() + 3;
 			return recFinal(varA, varB, EnteroCadena.of(nextA, nextS), ac);
 		}
 		return String.join("-", ac);
