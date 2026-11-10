@@ -15,14 +15,38 @@ public class Ejercicio1Binary {
     public static void main(String[] args) {
         BinaryTree<Character> t = BinaryTree.parse("A(B(A,D),A)", s -> s.charAt(0));
         System.out.println(palindromos(t));
-        System.out.println(palindromosNueva(t));
+        System.out.println(palindromos2(t));
     }
-	
+    
     public static Set<String> palindromos(BinaryTree<Character> tree) {
         return palindromos(tree, new ArrayList<Character>(), new HashSet<String>());
     }
 
     private static Set<String> palindromos(BinaryTree<Character> tree, List<Character> ls, Set<String> st) {
+        switch (tree) { // Evalúa el tipo de nodo actual.
+            case BEmpty() -> {} // Caso árbol vacío.
+            case BLeaf(var label) -> {  // En el caso de que sea una hoja.
+                ls.add(label); // Añade el caracter del nodo actual a la lista.
+                if (esPalindromo(ls)) { // Compruebo de que la lista sea un palíndromo.
+                    st.add(listaAString(ls)); // Si es un palíndromo  añado al conjunto las letras en en modo String.
+                }
+                ls.removeLast(); // Elimino el nodo de la lista.
+            }
+            case BTree(var label, var izq, var der) -> { // Si es un nodo intermedio con hijos.
+                ls.add(label); // Añade el caracter del nodo a la lista.
+                palindromos(izq, ls, st); // Llamada recursiva para aplicar la función al subárbol izquierdo.
+                palindromos(der, ls, st); // Llamada recursiva para aplicar la función al subárbol derecho.
+                ls.removeLast(); // Elimina el nodo tras explorar ambas ramas.
+            }
+        }
+        return st;
+    }
+    
+    public static Set<String> palindromos2(BinaryTree<Character> tree) {
+        return palindromos2(tree, new ArrayList<Character>(), new HashSet<String>());
+    }
+
+    private static Set<String> palindromos2(BinaryTree<Character> tree, List<Character> ls, Set<String> st) {
         switch (tree) {
             case BEmpty<Character> t -> {}
             case BLeaf<Character> t -> { 
@@ -34,32 +58,8 @@ public class Ejercicio1Binary {
             }
             case BTree<Character> t -> { 
                 ls.add(t.label());
-                palindromos(t.left(), ls, st);
-                palindromos(t.right(), ls, st);
-                ls.removeLast();
-            }
-        }
-        return st;
-    }
-    
-    public static Set<String> palindromosNueva(BinaryTree<Character> tree) {
-        return palindromosNueva(tree, new ArrayList<Character>(), new HashSet<String>());
-    }
-
-    private static Set<String> palindromosNueva(BinaryTree<Character> tree, List<Character> ls, Set<String> st) {
-        switch (tree) {
-            case BEmpty() -> {}
-            case BLeaf(var label) -> { 
-                ls.add(label);
-                if (esPalindromo(ls)) {
-                    st.add(listaAString(ls));
-                }
-                ls.removeLast();
-            }
-            case BTree(var label, var izq, var der) -> { 
-                ls.add(label);
-                palindromosNueva(izq, ls, st);
-                palindromosNueva(der, ls, st);
+                palindromos2(t.left(), ls, st);
+                palindromos2(t.right(), ls, st);
                 ls.removeLast();
             }
         }
@@ -79,11 +79,12 @@ public class Ejercicio1Binary {
         return true;
     }
     
-    private static String listaAString(List<Character> ls) {
-        StringBuilder sb = new StringBuilder();
-        for (Character c : ls) {
-            sb.append(c);
-        }
-        return sb.toString();
+    private static String listaAString(List<Character> l) {
+    	StringBuilder res = new StringBuilder();
+    	for (Character c : l) {
+    		res.append(c);
+    	}
+    	return res.toString();
     }
+    
 }

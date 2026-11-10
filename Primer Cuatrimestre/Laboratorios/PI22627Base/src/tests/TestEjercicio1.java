@@ -20,7 +20,7 @@ public class TestEjercicio1 {
         try (Stream<String> lineas = Stream2.file("resources/Ejercicio1.txt")) {
             lineas.forEach(linea -> {
                 BinaryTree<Character> tree = BinaryTree.parse(linea, s -> s.charAt(0));
-                String2.toConsole("Árbol: %s\nResultado: %s", tree, Ejercicio1Binary.palindromosNueva(tree));
+                String2.toConsole("Árbol: %s\nResultado: %s", tree, Ejercicio1Binary.palindromos(tree));
             });
         }
     }
