@@ -27,7 +27,7 @@ public class TestEjercicio1 {
 
     private static void testEjercicio1Nary() {
         String2.toConsole("\nEJERCICIO 1 - Nary");
-        try (Stream<String> lineas = Stream2.file("resources/Ejercicio1.txt")) {
+        try (Stream<String> lineas = Stream2.file("resources/Ejercicio1Nary.txt")) {
             lineas.forEach(linea -> {
                 Tree<Character> tree = Tree.parse(linea, s -> s.charAt(0));
                 String2.toConsole("Árbol: %s\nResultado: %s", tree, Ejercicio1Nary.palindromos(tree));

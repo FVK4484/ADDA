@@ -1,0 +1,8 @@
+a(b,c,d)
+a(b(a,d,e),c(a),d(f,a,g))
+a(b(a,c),b(d,a,e),b(f))
+r(a(d(a(r,s,t),b),c),e,f)
+a(b(b(a,c),d,e),f,g)
+m(a,b(m,c,d),c(e,f,g))
+a(b(a(b(a,d,e),f),g),h,i)
+q(q,r(s,t,u),v,w)

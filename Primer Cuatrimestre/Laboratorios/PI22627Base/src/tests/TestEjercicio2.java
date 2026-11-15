@@ -27,7 +27,7 @@ public class TestEjercicio2 {
 
     private static void testEjercicio2Nary() {
         String2.toConsole("\nEJERCICIO 2 - Nary");
-        try (Stream<String> lineas = Stream2.file("resources/Ejercicio2.txt")) {
+        try (Stream<String> lineas = Stream2.file("resources/Ejercicio2Nary.txt")) {
             lineas.forEach(linea -> {
                 Tree<Integer> tree = Tree.parse(linea, Integer::valueOf);
                 String2.toConsole("Árbol: %s\nResultado: %s", tree, Ejercicio2Nary.etiquetasPorParidad(tree));
