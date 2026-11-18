@@ -1,6 +1,7 @@
 package tests;
 
 import ejercicio2.Ejercicio2Binary;
+
 import ejercicio2.Ejercicio2Nary;
 import us.lsi.common.String2;
 import java.util.stream.Stream;
