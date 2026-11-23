@@ -16,24 +16,36 @@ import us.lsi.graphs.GraphsReader;
 import us.lsi.graphs.views.SubGraphView;
 
 public class Ejercicio3 {
+	
+	public static List<Persona> getPadres(Graph<Persona, Parentesco> g, Persona p) {
+		return g.incomingEdgesOf(p).stream()
+				.map(g::getEdgeSource)
+				.toList();
+	}
 
     public static Graph<Persona, Parentesco> apartadoA(Graph<Persona, Parentesco> g) {
-    	Predicate<Persona> pv = pv -> {
-    		Set<Parentesco> aristas = g.incomingEdgesOf(pv);
-    		if (aristas.size() != 2) {
+    	Predicate<Persona> pv = p -> {
+    		List<Persona> padres = getPadres(g, p);
+    		if (padres.size() != 2) {
     			return false;
-    		}
-    		List<Personas> padres = g.
+    		} 
+    		Persona p1 = padres.get(0);
+    		Persona p2 = padres.get(1);
+    		return p1.ciudad().equals(p2.ciudad()) && p1.nacimiento().equals(p2.nacimiento());
     	};
-    	Predicate<Parentesco> pe = pe -> ;
-    	Graph<Persona, Parentesco> vista = SubGraphView.of(g, pv, pe);
-    	mostrarGrafoApartadoA(g, vista, ".resources/Ejercicio3/Ejercicio3_1.txt");
-    	return g;
+    	
+    	Predicate<Parentesco> pe = e -> true;
+    	
+    	return SubGraphView.of(g, pv, pe);
     }
 
     public static void mostrarGrafoApartadoA(Graph<Persona, Parentesco> g, Graph<Persona, Parentesco> vista, String file) {
-    	System.out.println(vista);
-    	return;
+    	GraphColors.toDot(g, 
+    			file,
+    			v -> v.toString(),
+    			e -> "",
+    			v -> GraphColors.colorIf(Color.blue, vista.containsVertex(v)),
+    			e -> GraphColors.colorIf(Color.blue, vista.containsEdge(e)));
     }
 
     public static Set<Persona> apartadoB(Graph<Persona, Parentesco> g, Persona persona) {
