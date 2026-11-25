@@ -27,7 +27,7 @@ public class TestEjercicio3 {
                 .orElseThrow(() -> new IllegalArgumentException("No existe la persona: " + nombre));
     }
 
-    public static void testsEjercicio3(String file, String letra, String nombreB, String nombreC1, String nombreC2) {
+    public static void testsEjercicio3(String file, String sufijo, String nombreB, String nombreC1, String nombreC2) {
  
         Graph<Persona, Parentesco> g = GraphsReader.newGraph(
                 file,
@@ -42,14 +42,14 @@ public class TestEjercicio3 {
         System.out.println("\nApartado A):");
         Graph<Persona, Parentesco> vistaA = Ejercicio3.apartadoA(g);
         System.out.println("Personas de la vista: " + vistaA.vertexSet());
-        Ejercicio3.mostrarGrafoApartadoA(g, vistaA, "out/Ejercicio3_" + letra + "_A.gv");
+        Ejercicio3.mostrarGrafoApartadoA(g, vistaA, "out/Ejercicio3_" + sufijo + "_A.gv");
 
         // --- APARTADO B ---
         System.out.println("\nApartado B):");
         Persona pB = buscarPersona(g, nombreB);
         Set<Persona> ancestros = Ejercicio3.apartadoB(g, pB);
         System.out.println("Ancestros de " + pB + ": " + ancestros);
-        Ejercicio3.mostrarGrafoApartadoB(g, pB, ancestros, "out/Ejercicio3_" + letra + "_B.gv");
+        Ejercicio3.mostrarGrafoApartadoB(g, pB, ancestros, "out/Ejercicio3_" + sufijo + "_B.gv");
 
         // --- APARTADO C ---
         System.out.println("\nApartado C):");
@@ -62,13 +62,13 @@ public class TestEjercicio3 {
         System.out.println("\nApartado D):");
         Set<Persona> d = Ejercicio3.apartadoD(g);
         System.out.println("Personas con hijos con distintas personas: " + (d.isEmpty() ? "No hay" : d));
-        Ejercicio3.mostrarGrafoApartadoD(g, d, "out/Ejercicio3_" + letra + "_D.gv");
+        Ejercicio3.mostrarGrafoApartadoD(g, d, "out/Ejercicio3_" + sufijo + "_D.gv");
 
         // --- APARTADO E ---
         System.out.println("\nApartado E):");
         Set<Persona> e = Ejercicio3.apartadoE(g);
         System.out.println("Conjunto mínimo (" + e.size() + "): " + e);
-        Ejercicio3.mostrarGrafoApartadoE(g, e, "out/Ejercicio3_" + letra + "_E.gv");
+        Ejercicio3.mostrarGrafoApartadoE(g, e, "out/Ejercicio3_" + sufijo + "_E.gv");
 
         System.out.println("==================================================================\n");
     }
